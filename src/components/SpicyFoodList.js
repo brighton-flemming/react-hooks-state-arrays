@@ -11,10 +11,20 @@ function SpicyFoodList() {
   }
 
   const foodList = foods.map((food) => (
-    <li key={food.id}>
-      {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}
+    <li key={food.id}>  
+      {food.name} | Heat: {food.heatLevel} | Cuisine: {food.cuisine}{" "}
+      <button onClick={() => updateHeatLevel(food.id, food.heatLevel + 1)}> Increase Heat</button>
     </li>
   ));
+  
+  function updateHeatLevel(foodId, newHeatLevel) {
+    setFoods((prevFoods) =>
+      prevFoods.map((food) =>
+      food.id === foodId ? {...food, heatLevel: newHeatLevel } : food
+      )
+    );
+  }
+
 
   return (
     <div>
